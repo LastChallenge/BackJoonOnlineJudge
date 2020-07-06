@@ -18,8 +18,11 @@ public class N2108 {
       }
       sc.close();
       
+      nums = main.sort(nums, 0, nums.length - 1);
+      
       System.out.println(main.getAvg(nums));
       System.out.println(main.getMedian(nums));
+      System.out.println(main.getMode(nums));
       System.out.println(main.getRange(nums));
    }
    public int getAvg(int[] nums) {  //산술평균
@@ -42,21 +45,19 @@ public class N2108 {
 		   return nums[0];
 	   }
 	   
-      nums = sort(nums, 0, nums.length - 1);
       int mid = nums[nums.length / 2];
       
       return mid;
    }
    
    public int getMode(int[] nums) {  //최빈값
+      int maxIndex;
+	  maxIndex = Csort(nums);
       
-      
-      return 0;
+      return maxIndex;
    }
    
    public int getRange(int[] nums) {  //범위
-	   //-3 -2 -2 -1 -1
-      nums = sort(nums, 0, nums.length - 1);
       int range = nums[nums.length - 1] - nums[0];
       
       return Math.abs(range);
@@ -65,7 +66,7 @@ public class N2108 {
    public int[] sort(int[] nums, int p, int r) {
       
  
-      /* 버블 정렬
+      /* 버블 정렬 O(n2)
       for(int i = 0; i < nums.length; i++) {
          for(int j = 1; j < nums.length - i; j++) {
             if(nums[j] < nums[j - 1]) {
@@ -77,7 +78,7 @@ public class N2108 {
       }
       */
 	   
-      /* 선택 정렬 
+      /* 선택 정렬 O(n2)
       for(int i = 0; i < nums.length - 1; i++) {
          int min = i;
          for(int j = i + 1; j < nums.length; j++) {
@@ -132,16 +133,36 @@ public class N2108 {
 	   return tmp;
    }
    
-   // 계수정렬 이용 해볼 예정...
-   public int[] Csort(int[] nums) {
-	   int[] cnt = new int[8001];
+   // 계수정렬을 활용한 최빈값 구하기 구글에서 퍼옴 (많이 어렵다)
+   public int Csort(int[] nums) {
+	   //-2 1 2 3 8
+	   //0 ~ 8000 -> -4000 ~ 4000 -> -2 + 4000 = 3998 
 	   
+	   int[] cnt = new int[8001];
+	   int maxFreq = 0; //최대 빈도
+	   int maxIndex = 0; // 최대 빈도 값을 가진 인덱스
+	   boolean twice = false;
+	   
+	   for(int i = 0; i < nums.length; i++) {
+		   cnt[nums[i] + 4000]++; 
+	   }
 	   for(int i = 0; i < cnt.length; i++) {
-		   
+		   if(cnt[i] > maxFreq) {
+			   maxFreq = cnt[i];
+		   }
 	   }
 	   
+	   for(int i = 0; i < cnt.length; i++) {
+		   if(cnt[i] == maxFreq) { //최빈값이라면
+			   if(twice) {
+				   maxIndex = i - 4000;
+				   break;
+			   }
+			   maxIndex = i - 4000;
+			   twice = true;
+		   }
+	   }
 	   
-	   return nums;
+	   return maxIndex;
    }
-   
 }
