@@ -1,6 +1,6 @@
 /*
- * 보류!
- * 
+ * 단어 공부 - 가장 많이 나온 단어를 출력하는 문제 단! 많이 나온 단어가 중복이면 '?' 출력
+ * 2020-07-07
  */
 package 문자열;
 
@@ -13,16 +13,32 @@ public class N1157 {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		String S = sc.next(); //M I S S I S S I P I
+		String s = sc.next(); //M i s s i s s i p i
 		
-		char[] wordlist = new char[S.length()];
+		sc.close();
+		s = s.toUpperCase(); // M I S S I S S I P I
 		
-		for(int i = 0; i > S.length(); i++) {
-			wordlist[i] = S.charAt(i);
+		
+		int[] cnt_word = new int[26];
+		int max_cnt = 0;
+		char answer = '?';
+		
+		for(int i = 0; i < s.length(); i++) {
+			cnt_word[s.charAt(i) - 65]++;
 		}
 		
 		
+		for(int i = 0; i < cnt_word.length; i++) {
+			if(max_cnt < cnt_word[i]) {
+				max_cnt = cnt_word[i];  // 알파벳 등장 횟수
+			    answer = (char) (i + 65); // 무슨 알파벳인지
+			} else if(cnt_word[i] == max_cnt) { //
+				answer = '?';
+			}
 
+			
+		}
+		System.out.println(answer);
 	}
 
 }
