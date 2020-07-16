@@ -1,6 +1,4 @@
-//https://hongku.tistory.com/243
-
-package ¹®ÀÚ¿­;
+package Â¹Â®Ã€ÃšÂ¿Â­;
 
 import java.io.*;
 
