@@ -4,8 +4,12 @@
 * 아마도 20년6월쯤에 시작한듯..? </br>
 * 언어는 자바로 함 
 
+* 2022 2월 9일 깃허브 다시 업로드
+
 ## 참고자료
-* Google..
+* Google
+* https://st-lab.tistory.com/category/JAVA%20-%20백준%20%5BBAEK%20JOON%5D
+* 
 </br>
 
 
